@@ -1,3 +1,4 @@
+import "package:firebase_aut/forgot_passoword.dart";
 import "package:firebase_aut/myhomepage.dart";
 import "package:firebase_aut/signup_page.dart";
 import "package:firebase_aut/ui_helper.dart";
@@ -81,21 +82,38 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()));
-                    },
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 109, 31, 210),
-                        fontSize: 18,
-                      ),
-                    ))
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpPage()));
+                  },
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 109, 31, 210),
+                      fontSize: 18,
+                    ),
+                  ),
+                )
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ForgotPassword()),
+                );
+              },
+              child: const Text(
+                "Forgot Password",
+                style: TextStyle(color: Color.fromARGB(255, 23, 41, 240)),
+              ),
+            )
           ],
         ),
       ),
