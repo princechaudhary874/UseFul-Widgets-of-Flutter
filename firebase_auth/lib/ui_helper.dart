@@ -26,11 +26,40 @@ class UiHelper {
         onPressed: () {
           voidCallback();
         },
+        style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.cyan)),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 30,color: Colors.white),
+          style: const TextStyle(fontSize: 30, color: Colors.white),
         ),
       ),
     );
+  }
+
+// alertbox
+  static customAlertBox(BuildContext context, String text) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(text),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Center(
+                  child: Text(
+                    "OK",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 }
