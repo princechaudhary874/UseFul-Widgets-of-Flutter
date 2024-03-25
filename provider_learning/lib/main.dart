@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_learning/provider/count_provider.dart';
 import 'package:provider_learning/provider/example_one_provider.dart';
-import 'package:provider_learning/screen/count_example.dart';
+import 'package:provider_learning/provider/favourite_provider.dart';
+// import 'package:provider_learning/screen/count_example.dart';
 import 'package:provider_learning/screen/example_one_add.dart';
+import 'package:provider_learning/screen/favourite_app/favourite_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,13 +34,14 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CountProvider()),
         ChangeNotifierProvider(create: (_) => ExampleProvider()),
+        ChangeNotifierProvider(create: (_) => FavouriteScreenProvider()),
       ],
       child: MaterialApp(
         title: 'Provider learning',
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: const ExampleOneProvider(),
+        home: const FavouriteScreen(),
       ),
     );
   }
