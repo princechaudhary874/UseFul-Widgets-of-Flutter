@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_learning/provider/count_provider.dart';
@@ -11,6 +13,16 @@ class CounterExample extends StatefulWidget {
 }
 
 class _CounterExampleState extends State<CounterExample> {
+  @override
+  void initState() {
+    final countProvider = Provider.of<CountProvider>(context, listen: false);
+
+    super.initState();
+    Timer.periodic(Duration(seconds: 1), (Timer) {
+      countProvider.setCount();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final countProvider = Provider.of<CountProvider>(context, listen: false);
