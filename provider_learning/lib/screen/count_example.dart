@@ -18,7 +18,7 @@ class _CounterExampleState extends State<CounterExample> {
     final countProvider = Provider.of<CountProvider>(context, listen: false);
 
     super.initState();
-    Timer.periodic(Duration(seconds: 1), (Timer) {
+    Timer.periodic(const Duration(seconds: 1), ( Timer) {
       countProvider.setCount();
     });
   }
