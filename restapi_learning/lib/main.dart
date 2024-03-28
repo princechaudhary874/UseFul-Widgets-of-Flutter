@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restapi_learning/example_one.dart';
+import 'package:restapi_learning/example_two.dart';
 import 'package:restapi_learning/home_screen.dart';
 
 void main() {
@@ -15,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ExampleOne(),
+      home: const ExampleTwo(),
     );
   }
 }
