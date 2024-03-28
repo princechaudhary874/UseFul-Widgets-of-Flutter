@@ -1,63 +1,53 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:restapi_learning/models/users_models.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:http/http.dart' as http;
 
-// complex json part 1
-class ExampleThree extends StatefulWidget {
-  const ExampleThree({super.key});
+class ExampleFour extends StatefulWidget {
+  const ExampleFour({super.key});
 
   @override
-  State<ExampleThree> createState() => _ExampleThreeState();
+  State<ExampleFour> createState() => _ExampleFourState();
 }
 
-class _ExampleThreeState extends State<ExampleThree> {
-  List<UserModels> userList = [];
-  Future<List<UserModels>> getUserApi() async {
+class _ExampleFourState extends State<ExampleFour> {
+  var data;
+  Future<void> getUserApi() async {
     final response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
-    var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
-      for (Map<String, dynamic> i in data) {
-        userList.add(UserModels.fromJson(i));
-      }
-      return userList;
-    } else {
-      return userList;
-    }
+      data = jsonDecode(response.body.toString());
+    } else {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Users complex".text.makeCentered(),
+        title: "User Api without using model".text.make(),
       ),
       body: Column(
         children: [
           FutureBuilder(
               future: getUserApi(),
-              builder: (context, AsyncSnapshot<List<UserModels>> snapshot) {
-                if (!snapshot.hasData) {
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator.adaptive();
                 } else {
                   return Expanded(
                     child: ListView.builder(
-                        itemCount: userList.length,
+                        itemCount: data.length,
                         itemBuilder: (context, index) {
                           return Card(
                             child: Column(
                               children: [
                                 ReusableRow(
-                                    title: 'Name', value: userList[index].name),
-                                ReusableRow(
-                                    title: 'Email',
-                                    value: userList[index].email),
-                                ReusableRow(
-                                    title: 'Address', value: userList[index].address!.city),
-                                    ReusableRow(
-                                    title: 'Latitude', value: userList[index].address!.geo!.lat),
+                                    title: 'name', value: data[index]['name'].toString()),
+                                     ReusableRow(
+                                    title: 'email', value: data[index]['email'].toString()),
+                                     ReusableRow(
+                                    title: 'street', value: data[index]['address']['street'].toString())
                               ],
                             ),
                           );
@@ -72,7 +62,7 @@ class _ExampleThreeState extends State<ExampleThree> {
 }
 
 class ReusableRow extends StatelessWidget {
-  String? title, value, city, lat;
+  String? title, value;
   ReusableRow({super.key, required this.title, required this.value});
 
   @override
