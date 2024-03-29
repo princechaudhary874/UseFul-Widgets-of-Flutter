@@ -32,7 +32,7 @@ class _WeatherApiState extends State<WeatherApi> {
           FutureBuilder(
               future: getweatherApi(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState==ConnectionState.waiting) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else {
                   return Column(
