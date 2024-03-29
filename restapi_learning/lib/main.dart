@@ -5,6 +5,7 @@ import 'package:restapi_learning/example_three.dart';
 import 'package:restapi_learning/example_two.dart';
 import 'package:restapi_learning/home_screen.dart';
 import 'package:restapi_learning/last_example.dart';
+import 'package:restapi_learning/weather_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       //  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LastExample(),
+      home: const WeatherApi(),
     );
   }
 }
