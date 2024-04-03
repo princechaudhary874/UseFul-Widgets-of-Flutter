@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -15,31 +16,61 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  FocusNode emailfocus = FocusNode();
+  FocusNode passwordfocus = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, RoutesName.home);
-            },
-            child: const Text("go to home"),
-          ),
-          10.heightBox,
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.pushNamed(context, RoutesName.home);
+          //   },
+          //   child: const Text("go to home"),
+          // ),
+          // 10.heightBox,
+          // TextFormField(
+          //   validator: (value) {},
+          //   decoration: const InputDecoration(
+          //     hintText: "Enter your email",
+          //   ),
+          // ),
+          // 50.heightBox,
+          // InkWell(
+          //   onTap: () {
+          //     Utils.toastMessage("message");
+          //   },
+          //   child: const Text("Show toast message"),
+          // ),
+
           TextFormField(
-            validator: (value) {},
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            focusNode: emailfocus,
             decoration: const InputDecoration(
-              hintText: "Enter your email",
+              hintText: "Email",
+              prefixIcon: Icon(Icons.mail),
             ),
-          ),
-          50.heightBox,
-          InkWell(
-            onTap: () {
-              Utils.toastMessage("message");
+            onFieldSubmitted: (value) {
+              FocusScope.of(context).requestFocus(passwordfocus);
             },
-            child: const Text("Show toast message"),
           ),
+          TextFormField(
+            controller: passwordController,
+            obscureText: true,
+            focusNode: passwordfocus,
+            obscuringCharacter: '*',
+            decoration: const InputDecoration(
+                hintText: "password",
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: Icon(Icons.visibility_off)),
+            onFieldSubmitted: (value) {
+              FocusScope.of(context).requestFocus(emailfocus);
+            },
+          )
         ],
       ),
     );
