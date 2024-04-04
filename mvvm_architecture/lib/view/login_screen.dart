@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mvvm_architecture/res/components/round_button.dart';
 import 'package:mvvm_architecture/utils/general_utils.dart';
 import 'package:mvvm_architecture/utils/routes/routes_name.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,14 +18,29 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   FocusNode emailfocus = FocusNode();
   FocusNode passwordfocus = FocusNode();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    _obsecurePassword.dispose();
+    emailfocus.dispose();
+    passwordfocus.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // InkWell(
           //   onTap: () {
@@ -55,22 +72,51 @@ class _LoginScreenState extends State<LoginScreen> {
               prefixIcon: Icon(Icons.mail),
             ),
             onFieldSubmitted: (value) {
-              FocusScope.of(context).requestFocus(passwordfocus);
+              // FocusScope.of(context).requestFocus(passwordfocus);
+              Utils.fieldFocusChange(context, emailfocus, passwordfocus);
             },
           ),
-          TextFormField(
-            controller: passwordController,
-            obscureText: true,
-            focusNode: passwordfocus,
-            obscuringCharacter: '*',
-            decoration: const InputDecoration(
-                hintText: "password",
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: Icon(Icons.visibility_off)),
-            onFieldSubmitted: (value) {
-              FocusScope.of(context).requestFocus(emailfocus);
-            },
-          )
+
+          ValueListenableBuilder(
+              valueListenable: _obsecurePassword,
+              builder: (context, value, child) {
+                return TextFormField(
+                  controller: passwordController,
+                  obscureText: _obsecurePassword.value,
+                  focusNode: passwordfocus,
+                  obscuringCharacter: '*',
+                  decoration: InputDecoration(
+                    hintText: "password",
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        _obsecurePassword.value = !_obsecurePassword.value;
+                      },
+                      child: _obsecurePassword.value
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                    ),
+                  ),
+                  onFieldSubmitted: (value) {
+                    // FocusScope.of(context).requestFocus(emailfocus);
+                    Utils.fieldFocusChange(context, passwordfocus, emailfocus);
+                  },
+                );
+              }),
+          20.heightBox,
+          RoundedButton(
+              title: 'Login',
+              onPress: () {
+                if (emailController.text.isEmpty) {
+                  Utils.snackBar("Enter valid email", context);
+                } else if (passwordController.text.isEmpty) {
+                  Utils.flushBarErrorMessage("Enter password", context);
+                } else if (passwordController.text.length < 8) {
+                  Utils.toastMessage("Enter 8 digits password");
+                } else {
+                  debugPrint('Api hits');
+                }
+              })
         ],
       ),
     );
