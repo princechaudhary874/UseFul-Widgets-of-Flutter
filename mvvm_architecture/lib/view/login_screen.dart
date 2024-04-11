@@ -1,12 +1,8 @@
-import 'dart:html';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mvvm_architecture/res/components/round_button.dart';
 import 'package:mvvm_architecture/utils/general_utils.dart';
-import 'package:mvvm_architecture/utils/routes/routes_name.dart';
+import 'package:mvvm_architecture/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 // import 'package:flutter/widgets.dart';
 
@@ -36,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       body: Column(
