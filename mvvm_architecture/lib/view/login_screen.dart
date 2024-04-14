@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           TextFormField(
             controller: emailController,
+          
             keyboardType: TextInputType.emailAddress,
             focusNode: emailfocus,
             decoration: const InputDecoration(
@@ -103,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
           20.heightBox,
           RoundedButton(
               title: 'Login',
+              loading: authViewModel.loading,
               onPress: () {
                 if (emailController.text.isEmpty) {
                   Utils.snackBar("Enter valid email", context);
@@ -111,6 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 } else if (passwordController.text.length < 8) {
                   Utils.toastMessage("Enter 8 digits password");
                 } else {
+                  Map data = {
+                    'email': emailController.text.toString(),
+                    'password': passwordController.text.toString()
+                  };
+
+                  authViewModel.loginApi(data,context);
+
                   debugPrint('Api hits');
                 }
               })

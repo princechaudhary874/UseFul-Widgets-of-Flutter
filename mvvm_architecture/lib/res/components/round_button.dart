@@ -23,12 +23,14 @@ class RoundedButton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20))),
         width: 120,
         child: Center(
-          child: Text(
-            title!,
-            style: const TextStyle(
-              color: AppColors.whiteColor,
-            ),
-          ),
+          child: loading
+              ? const CircularProgressIndicator()
+              : Text(
+                  title!,
+                  style: const TextStyle(
+                    color: AppColors.whiteColor,
+                  ),
+                ),
         ),
       ),
     );
