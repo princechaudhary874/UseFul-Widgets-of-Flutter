@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mvvm_architecture/res/components/round_button.dart';
-import 'package:mvvm_architecture/utils/general_utils.dart';
 import 'package:mvvm_architecture/utils/routes/routes_name.dart';
 import 'package:mvvm_architecture/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-// import 'package:flutter/widgets.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../utils/general_utils.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -104,22 +103,22 @@ class _LoginScreenState extends State<LoginScreen> {
               }),
           20.heightBox,
           RoundedButton(
-              title: 'Login',
-              loading: authViewModel.loading,
+              title: 'Sign Up',
+              loading: authViewModel.signUpLoading,
               onPress: () {
                 if (emailController.text.isEmpty) {
                   Utils.snackBar("Enter valid email", context);
                 } else if (passwordController.text.isEmpty) {
                   Utils.flushBarErrorMessage("Enter password", context);
-                } else if (passwordController.text.length < 8) {
-                  Utils.toastMessage("Enter 8 digits password");
+                } else if (passwordController.text.length < 6) {
+                  Utils.flushBarErrorMessage("Enter 6 digits password",context);
                 } else {
                   Map data = {
                     'email': emailController.text.toString(),
                     'password': passwordController.text.toString()
                   };
 
-                  authViewModel.loginApi(data, context);
+                  authViewModel.registerApi(data, context);
 
                   debugPrint('Api hits');
                 }
@@ -128,9 +127,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              "Don't have an account ?  ".text.make(),
-              "Sign Up".text.color(Colors.blue).make().onTap(() {
-                Navigator.pushNamed(context, RoutesName.register);
+              "Already have an account ?  ".text.make(),
+              "Sign In".text.color(Colors.blue).make().onTap(() {
+                Navigator.pushNamed(context, RoutesName.login);
               })
             ],
           )
