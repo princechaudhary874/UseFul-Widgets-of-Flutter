@@ -3,6 +3,7 @@ import 'package:mvvm_architecture/utils/routes/routes_name.dart';
 import 'package:mvvm_architecture/view/home_screen.dart';
 import 'package:mvvm_architecture/view/login_screen.dart';
 import 'package:mvvm_architecture/view/register_screen.dart';
+import 'package:mvvm_architecture/view/splash_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -10,6 +11,10 @@ class Routes {
       // case RoutesName.splash:
       //   return MaterialPageRoute(builder: (BuildContext context) => const SplashView());
       
+      case RoutesName.splash:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const SplasScreen());
+
       case RoutesName.home:
         return MaterialPageRoute(
             builder: (BuildContext context) => const HomeScreen());
