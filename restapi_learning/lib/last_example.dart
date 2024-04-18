@@ -13,7 +13,6 @@ class LastExample extends StatefulWidget {
 }
 
 class _LastExampleState extends State<LastExample> {
-  var data;
   Future<ProductModel> getProductsApi() async {
     final response =
         await http.get(Uri.parse('https://dummyjson.com/products'));
@@ -45,7 +44,11 @@ class _LastExampleState extends State<LastExample> {
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-                              ReusableRow(title: 'name', value: snapshot.data!.products![index].category.toString())
+                              ReusableRow(
+                                  title: 'name',
+                                  value: snapshot
+                                      .data!.products![index].category
+                                      .toString())
                             ],
                           );
                         }),
