@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'custom widgets/card/custom_card.dart';
 import 'custom widgets/snackbar/custom_alert_dialog.dart';
 import 'custom widgets/snackbar/custom_snackbar.dart';
 
@@ -58,6 +59,15 @@ class TestWidget extends StatelessWidget {
               onPressed: () =>
                   _showSnackbar(context, 'Random message', SnackbarType.info),
               child: const Text('Show Info Snackbar'),
+            ),
+            const SizedBox(height: 20),
+
+             const CustomCard(
+              imageUrl: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
+              title: 'Product Title',
+              subtitle: 'Product Subtitle',
+              price: 99.99,
+              rating: 4.5,
             ),
           ],
         ),

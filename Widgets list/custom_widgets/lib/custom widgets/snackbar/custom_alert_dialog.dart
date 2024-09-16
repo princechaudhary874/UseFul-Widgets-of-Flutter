@@ -5,7 +5,7 @@ class CustomCardDialog extends StatelessWidget {
   final String message;
   final IconData icon;
 
-  CustomCardDialog({
+  const CustomCardDialog({super.key, 
     required this.title,
     required this.message,
     this.icon = Icons.info,
