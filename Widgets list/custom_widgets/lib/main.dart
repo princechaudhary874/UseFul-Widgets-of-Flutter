@@ -2,6 +2,8 @@ import 'package:custom_widgets/custom%20widgets/searchfield/custom_searchfield.d
 import 'package:custom_widgets/test.dart';
 import 'package:flutter/material.dart';
 
+import 'custom widgets/card/custom_card_stack.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TestWidget(),
+      home: const CustomCardWidget(),
     );
   }
 }
