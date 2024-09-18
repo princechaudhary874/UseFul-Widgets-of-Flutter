@@ -1,6 +1,7 @@
 import 'package:custom_widgets/custom%20widgets/searchfield/custom_searchfield.dart';
 import 'package:custom_widgets/test.dart';
 import 'package:flutter/material.dart';
+import 'package:custom_widgets/chat_ai/dash_chat_ui_ai.dart';
 
 import 'custom widgets/card/custom_card_stack.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CustomCardWidget(),
+      home: const ChatBot(),
     );
   }
 }
