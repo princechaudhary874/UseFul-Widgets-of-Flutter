@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:custom_widgets/chat_ai/dash_chat_ui_ai.dart';
 
 import 'custom widgets/card/custom_card_stack.dart';
+import 'google_zoom_direct/google_meet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ChatBot(),
+      home:  MeetingLink(),
     );
   }
 }
